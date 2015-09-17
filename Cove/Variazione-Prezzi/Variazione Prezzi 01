@@ -1,0 +1,64 @@
+#include <array.au3>
+#include <GuiListView.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#include <File.au3>
+
+Dim $Dati[200], $aItems[10], $prodotti[200][15] , $AumDim[100],$Giacenze_Scomposte[6000][17],$aItems[6000],$Giacenze[6000]
+_FileReadToArray("C:/Procedure/Archivi/Cove/Variazioni_Listini.csv", $Dati) ; Csv file is in same directory as this script
+
+ConsoleWrite($Dati[0] & @CRLF)
+
+ConsoleWrite($Dati[1] & @CRLF) ;### Debug Console
+For $a = 1 To $Dati[0]
+    $aItems = StringSplit($Dati[$a], ";", 2)
+    For $b = 0 To UBound($aItems) - 1
+        $prodotti[$a - 1][$b] = $aItems[$b]
+        ConsoleWrite($prodotti[$a][$b] & @CRLF)
+    Next
+Next
+ConsoleWrite(UBound($aItems) & @CRLF)
+
+ReDim $prodotti[$Dati[0]][UBound($aItems)]
+
+_ArrayDisplay($prodotti, "pippo")
+
+ConsoleWrite($prodotti[2][0] & @CRLF)
+ConsoleWrite($prodotti[2][1] & @CRLF)
+ConsoleWrite($prodotti[2][2] & @CRLF)
+ConsoleWrite($prodotti[2][3] & @CRLF)
+ConsoleWrite($prodotti[2][4] & @CRLF)
+ConsoleWrite($prodotti[2][5] & @CRLF)
+ConsoleWrite($prodotti[2][6] & @CRLF)
+ConsoleWrite($prodotti[2][7] & @CRLF)
+ConsoleWrite($prodotti[2][8] & @CRLF)
+
+For $c = 1 to $Dati[0]-1
+	if $prodotti[$c][7] > String(0) then
+		$AumDim[$c] = "Aumentato"
+		;$prodotti[$c][9]= "Red"
+	ElseIf 	$prodotti[$c][7] <= String(0) then
+		$AumDim[$c] = "Diminuito"
+		;$prodotti[$c][10]= "Green"
+
+	EndIf
+next
+
+_FileReadToArray("C:/Procedure/Archivi/Cove/Ftp/Giacenze.txt", $Giacenze);Legge il file delle Giacenze nostre in Cove
+;_ArrayDisplay($Dati,"pippo")
+
+ConsoleWrite($Giacenze[0] & @crlf) ;### Debug Console
+				for $d = 1 to $Giacenze[0];UBound($Dati)
+					$bItems = StringSplit($Giacenze[$d], "|")
+					for $e = 1 to $bItems[0]
+					;ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : $aItems = ' & $aItems[$b] & @crlf & '>Error code: ' & @error & @crlf) ;### Debug Console
+					$Giacenze_Scomposte [$d][$e] = $bItems[$e]
+					next
+				Next
+
+_ArrayDisplay($AumDim, "pippi");visualizza variazioni
+
+_ArrayDisplay($Giacenze_Scomposte, "defi"); visualizza giacenze
+
+;
+;vzsdggx
