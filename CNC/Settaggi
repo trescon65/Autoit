@@ -1,0 +1,137 @@
+; Crea filr necessari per testare l'interfaccia grafica CNC, simulando
+; i dari ricevut dalle schede controllo motori
+
+#include <File.au3>
+
+Dim $aDati_Schede [3][20] , $aSettaggi_Schede [3][20]
+Dim $Dati
+
+call (Dati)
+call (Settaggi)
+call ("Scrivi",$aDati_Schede,$aSettaggi_Schede)
+
+Func Scrivi($aDati_Schede,$aSettaggi_Schede) ; scrivi su File
+	Local $file = FileOpen("dati_prova.txt", 1)
+	Local $file1 = FileOpen("settaggi_prova.txt", 1)
+
+	;Local $file = FileOpen(GUICtrlRead($Marca) & ".txt", 1)
+
+	; Check if file opened for writing OK
+	If $file = -1 Then
+		MsgBox(0, "Error", "Unable to open file.")
+		Exit
+	EndIf
+
+	_FileWriteFromArray($file, $aDati_Schede,0)
+	_FileWriteFromArray($file1, $aSettaggi_Schede,0)
+
+	;FileWriteLine($file, "Codice" & "Marca" & "Modello" & "Costo" & "Costo_Ivato" & "Marcopolo" & "Promo" & "Data" & @CRLF)
+	;FileWriteLine($file, "Marca" & @CRLF)
+	FileClose($file)
+EndFunc   ;==>Scrivi
+;
+Func Leggi ()
+	_FileReadToArray("dati_prova.txt", $Dati)
+
+EndFunc
+;
+; *******  Dimensionamento Variabili di Prova  *******
+Func Dati(); settaggio x lettura parametri schede (da scheda a pc)
+$aDati_Schede [0][0] = "241"
+$aDati_Schede [0][1] = "111"
+$aDati_Schede [0][2] = "110"
+$aDati_Schede [0][3] = "242"
+$aDati_Schede [0][4] = "0"
+$aDati_Schede [0][5] = "1"
+$aDati_Schede [0][6] = "2"
+$aDati_Schede [0][7] = "3"
+$aDati_Schede [0][8] = "4"
+$aDati_Schede [0][9] = "5"
+$aDati_Schede [0][10] = "6"
+$aDati_Schede [0][11] = "7"
+$aDati_Schede [0][12] = "8"
+$aDati_Schede [0][13] = "9"
+$aDati_Schede [0][14] = "255"
+;
+$aDati_Schede [1][0] = "241"
+$aDati_Schede [1][1] = "112"
+$aDati_Schede [1][2] = "110"
+$aDati_Schede [1][3] = "242"
+$aDati_Schede [1][4] = "0"
+$aDati_Schede [1][5] = "1"
+$aDati_Schede [1][6] = "2"
+$aDati_Schede [1][7] = "3"
+$aDati_Schede [1][8] = "4"
+$aDati_Schede [1][9] = "5"
+$aDati_Schede [1][10] = "6"
+$aDati_Schede [1][11] = "7"
+$aDati_Schede [1][12] = "8"
+$aDati_Schede [1][13] = "9"
+$aDati_Schede [1][14] = "255"
+;
+$aDati_Schede [2][0] = "241"
+$aDati_Schede [2][1] = "113"
+$aDati_Schede [2][2] = "110"
+$aDati_Schede [2][3] = "242"
+$aDati_Schede [2][4] = "0"
+$aDati_Schede [2][5] = "1"
+$aDati_Schede [2][6] = "2"
+$aDati_Schede [2][7] = "3"
+$aDati_Schede [2][8] = "4"
+$aDati_Schede [2][9] = "5"
+$aDati_Schede [2][10] = "6"
+$aDati_Schede [2][11] = "7"
+$aDati_Schede [2][12] = "8"
+$aDati_Schede [2][13] = "9"
+$aDati_Schede [2][14] = "255"
+EndFunc
+;
+Func Settaggi() ; settaggi range parametri per schede (da pc a schede)
+$aSettaggi_Schede [0][0] = "241"
+$aSettaggi_Schede [0][1] = "111"
+$aSettaggi_Schede [0][2] = "110"
+$aSettaggi_Schede [0][3] = "242"
+$aSettaggi_Schede [0][4] = "0"
+$aSettaggi_Schede [0][5] = "1"
+$aSettaggi_Schede [0][6] = "2"
+$aSettaggi_Schede [0][7] = "3"
+$aSettaggi_Schede [0][8] = "4"
+$aSettaggi_Schede [0][9] = "5"
+$aSettaggi_Schede [0][10] = "6"
+$aSettaggi_Schede [0][11] = "7"
+$aSettaggi_Schede [0][12] = "8"
+$aSettaggi_Schede [0][13] = "9"
+$aSettaggi_Schede [0][14] = "255"
+;
+$aSettaggi_Schede [1][0] = "241"
+$aSettaggi_Schede [1][1] = "112"
+$aSettaggi_Schede [1][2] = "110"
+$aSettaggi_Schede [1][3] = "242"
+$aSettaggi_Schede [1][4] = "0"
+$aSettaggi_Schede [1][5] = "1"
+$aSettaggi_Schede [1][6] = "2"
+$aSettaggi_Schede [1][7] = "3"
+$aSettaggi_Schede [1][8] = "4"
+$aSettaggi_Schede [1][9] = "5"
+$aSettaggi_Schede [1][10] = "6"
+$aSettaggi_Schede [1][11] = "7"
+$aSettaggi_Schede [1][12] = "8"
+$aSettaggi_Schede [1][13] = "9"
+$aSettaggi_Schede [1][14] = "255"
+;
+$aSettaggi_Schede [2][0] = "241"
+$aSettaggi_Schede [2][1] = "113"
+$aSettaggi_Schede [2][2] = "110"
+$aSettaggi_Schede [2][3] = "242"
+$aSettaggi_Schede [2][4] = "0"
+$aSettaggi_Schede [2][5] = "1"
+$aSettaggi_Schede [2][6] = "2"
+$aSettaggi_Schede [2][7] = "3"
+$aSettaggi_Schede [2][8] = "4"
+$aSettaggi_Schede [2][9] = "5"
+$aSettaggi_Schede [2][10] = "6"
+$aSettaggi_Schede [2][11] = "7"
+$aSettaggi_Schede [2][12] = "8"
+$aSettaggi_Schede [2][13] = "9"
+$aSettaggi_Schede [2][14] = "255"
+EndFunc
